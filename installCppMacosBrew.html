@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Untitled</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>installCppMacosBrew</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -15231,37 +15231,52 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ol>
-<li>Klistra in i terminal:<ul>
-<li>/bin/bash -c &quot;$(curl -fsSL <a href="https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh">https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh</a>)&quot;</li>
-</ul>
-</li>
-<li>Klistra även detta:<ul>
-<li>brew install gcc</li>
-</ul>
-</li>
+<li>Öppna <strong>Terminal</strong> (spotLight Search, <strong>cmd+Space</strong> och skriv de första boktäverna) och klistra in:
+<br></li>
 </ol>
-<h3 id="I-VS-Code">I VS Code<a class="anchor-link" href="#I-VS-Code">&#182;</a></h3><ol start="3">
-<li><p><em>Installera extension C/C++:</em> Leta efter &quot;C/C++&quot; extension by Microsoft&quot;</p>
+<p><code>/bin/bash -c &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)&quot;</code>
+<br><br></p>
+<ol start="2">
+<li>Sen i texten som blixtrar förbi finns där (ibland) instruktioner om två extra rader som du också bör klistra in för att programmen ska kunna hitta varandra. Så håll utkick efter nånting i stil med:</li>
+</ol>
+<p><code>(echo; echo 'eval &quot;$(/opt/homebrew/bin/brew shellenv)&quot;') &gt;&gt; /Users/simonlindstrom/.zprofile</code>
+<br>
+... och
+<br><code>eval &quot;$(/opt/homebrew/bin/brew shellenv)&quot;</code>
+&lt;br</p>
+<p><em>Men OBS! kopiera inte bara detta ovan, eftersom det är användar-specifikt (inte alla heter ju simonlindstrom, typ)</em></p>
+<ol start="3">
+<li>Nu installerar vi g++ (kopiera o klistra):
+<code>brew install gcc</code></li>
+</ol>
+<h3 id="I-VS-Code">I VS Code<a class="anchor-link" href="#I-VS-Code">&#182;</a></h3><ol start="4">
+<li><p><em>Installera extension C/C++:</em> Klicka <img src="extensionIcon.png" alt="Icon" width="20" style="vertical-align: middle;"/>
+och leta efter &quot;C/C++&quot; extension by Microsoft&quot;. Det finns två stycken, installera båda.</p>
 </li>
-<li><p>Cmd+Shift+P o skriv &quot;C/C++: Edit Configurations (JSON)&quot; Detta kommer öppna c_cpp_properties.json där du sätter path:en till c++ kompilatorn.</p>
+<li><p>Som vanligt, i VS Code, öppna / skapa en folder för detta lilla c++ projekt.</p>
+</li>
+<li><p>Cmd+Shift+P och skriv &quot;C/C++: Edit Configurations (JSON)&quot; Detta kommer öppna c_cpp_properties.json där du sätter path:en till c++ kompilatorn.</p>
 </li>
 </ol>
 <ul>
 <li>kolla var den finns genom att skriva:<ul>
-<li>&quot;whereis gcc&quot;</li>
+<li><code>whereis gcc</code> (i <strong>Terminal</strong>. Antingen den i VS Code eller den du startede med. Kvittar.)</li>
+<li>Editera JSON-filen enligt infon du hittar ovan</li>
 </ul>
 </li>
 </ul>
-<ol start="5">
-<li><p>Skriv nån c++ kod och spara den under valfritt namn</p>
+<ol start="7">
+<li><p>Skriv nån c++ kod och spara den under valfritt namn t.ex <strong>test.cpp</strong></p>
 </li>
 <li><p>Om inte den finns redan, så skapa en &quot;tasks.json&quot; i .vscode mappen i ditt workspace</p>
 </li>
-<li><p>Klicka på den och ändra så det passar med path till g++ (samma som gcc) samt filnamnet du gav till cpp-filen</p>
+</ol>
 <ul>
-<li>Jag klistrade in följande i filen:</li>
+<li>(Klicka &quot;fäll ner&quot;-ikonen för <strong>.vscode</strong> och klicka <img src="newFileIcon.png" alt="Icon" width="20" style="vertical-align: middle;"/>)</li>
 </ul>
-</li>
+<ol start="10">
+<li>Editera nu <strong>tasks.json</strong> så det passar med path:en till g++ (samma som gcc) SAMT ändra till filnamnet du gav till cpp-filen
+* Jag klistrade in följande i filen:</li>
 </ol>
 
 </div>
@@ -15284,7 +15299,9 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
             <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;/usr/bin/g++&quot;</span><span class="p">,</span>
             <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="p">[</span>
                 <span class="s2">&quot;-g&quot;</span><span class="p">,</span>
-                <span class="s2">&quot;valfrittNamn.cpp&quot;</span>
+                <span class="s2">&quot;test.cpp&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;-o&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;exeFil&quot;</span>
             <span class="p">],</span>
             <span class="s2">&quot;group&quot;</span><span class="p">:</span> <span class="p">{</span>
                 <span class="s2">&quot;kind&quot;</span><span class="p">:</span> <span class="s2">&quot;build&quot;</span><span class="p">,</span>
@@ -15301,13 +15318,33 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 
 </div>
+<div id="cell-id=970e105f-3fab-4070-a561-15b7409759b3" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ol start="10">
+<li>Markera din .cpp fil och tryck  <em>Cmd + Shift + B</em></li>
+</ol>
+<p>Filen <code>exeFil</code>bör nu ha dyckt upp i din vs-folder</p>
+<ol start="11">
+<li>Nu borde du kunna köra ditt nykompilerade C++ program (i Terminal) genom att skriva <br></li>
+</ol>
+<p><code>./exeFil</code></p>
+<p>KLART</p>
+
+</div>
+</div>
+</div>
+</div>
 <div id="cell-id=52e453b4-6829-4f3a-98e4-b67631c300b6" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>================================================================================</p>
+<p>=============================================================================</p>
 
 </div>
 </div>
@@ -15324,22 +15361,18 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div id="cell-id=9547fbf6-a717-4db0-8c86-719294a4e480" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div>
+<div id="cell-id=4f72d531-9f07-4020-91b1-6533bf145e8a" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">g</span><span class="o">++</span> <span class="o">-</span><span class="n">g</span> <span class="n">valfrittNamn</span><span class="o">.</span><span class="n">cpp</span> <span class="o">-</span><span class="n">o</span> <span class="n">mittProgram</span>
-</pre></div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><code>g++ -g test.cpp -o exeFil</code></p>
 
-     </div>
 </div>
 </div>
 </div>
-
 </div>
 <div id="cell-id=383d09e9-386e-46cf-8508-bdc78e44023b" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
@@ -15352,22 +15385,18 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 </div>
 </div>
 </div>
-</div><div id="cell-id=fdbc62e7-4cf9-46f6-a15f-79efadf2d4ed" class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div>
+<div id="cell-id=9f63e91e-b70d-49ef-b83d-57e2cc12a990" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">./</span><span class="n">mittProgram</span>
-</pre></div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><code>./exeFil</code></p>
 
-     </div>
 </div>
 </div>
 </div>
-
 </div>
 <div id="cell-id=8857503b-acda-40b5-9e5e-77d00aa5c040" class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
 <div class="jp-Cell-inputWrapper">
